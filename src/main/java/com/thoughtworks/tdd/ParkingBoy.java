@@ -21,6 +21,9 @@ public class ParkingBoy {
     }
 
     public String giveErrorMessage(Ticket ticket) {
-        return "Unrecognized parking ticket.";
+        if(ticket != null) {
+            return "Unrecognized parking ticket.";
+        }
+        return "Please provide your parking ticket.";
     }
 }
