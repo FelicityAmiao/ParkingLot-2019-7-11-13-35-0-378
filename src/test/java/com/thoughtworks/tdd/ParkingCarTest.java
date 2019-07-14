@@ -2,6 +2,7 @@ package com.thoughtworks.tdd;
 
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertSame;
 
 public class ParkingCarTest {
@@ -32,6 +33,17 @@ public class ParkingCarTest {
 
         assertSame(car, fetchCar);
         assertSame(car2, fetchCar2);
+    }
+
+    @Test
+    public void should_return_no_car_when_call_fetch_given_fake_ticket_by_parking_car() {
+        ParkingBoy parkingBoy = new ParkingBoy();
+        ParkingLot parkingLot = new ParkingLot();
+        parkingBoy.setParkingLot(parkingLot);
+        Ticket fakeTicket = new Ticket();
+        Car fetchCar = parkingBoy.fetch(fakeTicket);
+
+        assertNull(fetchCar);
     }
 
 }
