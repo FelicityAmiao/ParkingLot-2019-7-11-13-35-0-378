@@ -59,4 +59,18 @@ public class ParkingCarTest {
         assertNull(fetchCar);
     }
 
+    @Test
+    public void should_return_no_ticket_when_call_park_given_parking_lot_is_full_of_10() {
+        Car car = new Car();
+        ParkingBoy parkingBoy = new ParkingBoy();
+        ParkingLot parkingLot = new ParkingLot();
+        parkingBoy.setParkingLot(parkingLot);
+        for(int i = 0; i < 10; i++) {
+            parkingBoy.park(car, new Ticket());
+        }
+        Ticket ticket = parkingBoy.park(car, new Ticket());
+
+        assertNull(ticket);
+    }
+
 }

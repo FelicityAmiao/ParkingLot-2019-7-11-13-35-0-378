@@ -13,4 +13,8 @@ public class ParkingLot {
     public Car getCar(Ticket ticket) {
         return cars.remove(ticket);
     }
+
+    public boolean isCarFull() {
+        return cars.size() == 10;
+    }
 }
