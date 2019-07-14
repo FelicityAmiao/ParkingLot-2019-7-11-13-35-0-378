@@ -21,4 +21,8 @@ public class ParkingLot {
     public boolean hasParkedCar(Car car) {
         return cars.containsValue(car);
     }
+
+    public boolean isFakeOrUsedTicket(Ticket ticket) {
+        return cars.containsKey(ticket);
+    }
 }

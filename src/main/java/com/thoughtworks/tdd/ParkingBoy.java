@@ -19,14 +19,12 @@ public class ParkingBoy {
     }
 
     public Car fetch(Ticket ticket) {
-        return this.parkingLot.getCar(ticket);
-    }
-
-    public String giveErrorMessage(Ticket ticket) {
-        if(ticket != null) {
-            return "Unrecognized parking ticket.";
+        if(parkingLot.isFakeOrUsedTicket(ticket)) {
+            this.errorMessage = "Unrecognized parking ticket.";
+        }else if(ticket == null) {
+            this.errorMessage = "Please provide your parking ticket.";
         }
-        return "Please provide your parking ticket.";
+        return this.parkingLot.getCar(ticket);
     }
 
     public String getErrorMessage() {

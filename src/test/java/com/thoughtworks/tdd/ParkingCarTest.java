@@ -118,7 +118,7 @@ public class ParkingCarTest {
         Car fetchCar = parkingBoy.fetch(fakeTicket);
         parkingBoy.fetch(ticket);
         Car fetchCar2 = parkingBoy.fetch(ticket);
-        String errorMessage = parkingBoy.giveErrorMessage(ticket);
+        String errorMessage = parkingBoy.getErrorMessage();
 
         assertNull(fetchCar);
         assertNull(fetchCar2);
@@ -133,7 +133,7 @@ public class ParkingCarTest {
         parkingBoy.setParkingLot(parkingLot);
         parkingBoy.park(car, new Ticket());
         Car fetchCar1 = parkingBoy.fetch(null);
-        String errorMessage = parkingBoy.giveErrorMessage(null);
+        String errorMessage = parkingBoy.getErrorMessage();
 
         assertNull(fetchCar1);
         assertEquals("Please provide your parking ticket.", errorMessage);
