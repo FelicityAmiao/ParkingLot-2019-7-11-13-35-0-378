@@ -205,9 +205,9 @@ public class ParkingCarTest {
         for(int i = 0; i < 4; i++) {
             parkingBoy.park(new Car(), new Ticket());
         }
-        String twoLotRestCapacity = parkingBoy.checkTwoLotPositionRate();
+        String twoLotPositionRate = parkingBoy.checkTwoLotPositionRate();
 
-        assertEquals("first: 0.8, second: 0.8", twoLotRestCapacity);
+        assertEquals("first: 0.8, second: 0.8", twoLotPositionRate);
     }
 
 }
