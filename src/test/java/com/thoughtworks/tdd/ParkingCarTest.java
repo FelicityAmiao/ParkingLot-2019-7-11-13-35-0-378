@@ -12,8 +12,9 @@ public class ParkingCarTest {
     public void should_return_car_when_call_fetch_given_ticket_by_parking_car() {
         Car car = new Car();
         ParkingBoy parkingBoy = new ParkingBoy();
-        ParkingLot parkingLot = new ParkingLot();
-        parkingBoy.setParkingLot(parkingLot);
+        ParkingLot parkingLotFirst = new ParkingLot();
+        ParkingLot parkingLotSecond = new ParkingLot();
+        parkingBoy.setParkingLot(parkingLotFirst, parkingLotSecond);
         Ticket ticket = parkingBoy.park(car, new Ticket());
         Car car2 = parkingBoy.fetch(ticket);
 
@@ -25,8 +26,9 @@ public class ParkingCarTest {
         Car car = new Car();
         Car car2 = new Car();
         ParkingBoy parkingBoy = new ParkingBoy();
-        ParkingLot parkingLot = new ParkingLot();
-        parkingBoy.setParkingLot(parkingLot);
+        ParkingLot parkingLotFirst = new ParkingLot();
+        ParkingLot parkingLotSecond = new ParkingLot();
+        parkingBoy.setParkingLot(parkingLotFirst, parkingLotSecond);
         Ticket ticket = parkingBoy.park(car, new Ticket());
         Ticket ticket2 = parkingBoy.park(car2, new Ticket());
         Car fetchCar = parkingBoy.fetch(ticket);
@@ -39,8 +41,9 @@ public class ParkingCarTest {
     @Test
     public void should_return_no_car_when_call_fetch_given_fake_ticket_by_parking_car() {
         ParkingBoy parkingBoy = new ParkingBoy();
-        ParkingLot parkingLot = new ParkingLot();
-        parkingBoy.setParkingLot(parkingLot);
+        ParkingLot parkingLotFirst = new ParkingLot();
+        ParkingLot parkingLotSecond = new ParkingLot();
+        parkingBoy.setParkingLot(parkingLotFirst, parkingLotSecond);
         Ticket fakeTicket = new Ticket();
         Car fetchCar = parkingBoy.fetch(fakeTicket);
 
@@ -50,8 +53,9 @@ public class ParkingCarTest {
     @Test
     public void should_return_no_car_when_call_fetch_given_no_ticket() {
         ParkingBoy parkingBoy = new ParkingBoy();
-        ParkingLot parkingLot = new ParkingLot();
-        parkingBoy.setParkingLot(parkingLot);
+        ParkingLot parkingLotFirst = new ParkingLot();
+        ParkingLot parkingLotSecond = new ParkingLot();
+        parkingBoy.setParkingLot(parkingLotFirst, parkingLotSecond);
         Car fetchCar = parkingBoy.fetch(null);
 
         assertNull(fetchCar);
@@ -61,8 +65,9 @@ public class ParkingCarTest {
     public void should_return_no_car_when_call_fetch_given_used_ticket_by_parking_car() {
         Car car = new Car();
         ParkingBoy parkingBoy = new ParkingBoy();
-        ParkingLot parkingLot = new ParkingLot();
-        parkingBoy.setParkingLot(parkingLot);
+        ParkingLot parkingLotFirst = new ParkingLot();
+        ParkingLot parkingLotSecond = new ParkingLot();
+        parkingBoy.setParkingLot(parkingLotFirst, parkingLotSecond);
         Ticket ticket = parkingBoy.park(car, new Ticket());
         parkingBoy.fetch(ticket);
         Car fetchCar = parkingBoy.fetch(ticket);
@@ -74,8 +79,9 @@ public class ParkingCarTest {
     public void should_return_no_ticket_when_call_park_given_parking_lot_is_full_of_10() {
         Car car = new Car();
         ParkingBoy parkingBoy = new ParkingBoy();
-        ParkingLot parkingLot = new ParkingLot();
-        parkingBoy.setParkingLot(parkingLot);
+        ParkingLot parkingLotFirst = new ParkingLot();
+        ParkingLot parkingLotSecond = new ParkingLot();
+        parkingBoy.setParkingLot(parkingLotFirst, parkingLotSecond);
         for(int i = 0; i < 10; i++) {
             parkingBoy.park(car, new Ticket());
         }
@@ -88,8 +94,9 @@ public class ParkingCarTest {
     public void should_return_no_ticket_when_call_park_given_parked_car() {
         Car car = new Car();
         ParkingBoy parkingBoy = new ParkingBoy();
-        ParkingLot parkingLot = new ParkingLot();
-        parkingBoy.setParkingLot(parkingLot);
+        ParkingLot parkingLotFirst = new ParkingLot();
+        ParkingLot parkingLotSecond = new ParkingLot();
+        parkingBoy.setParkingLot(parkingLotFirst, parkingLotSecond);
         parkingBoy.park(car, new Ticket());
         Ticket ticket = parkingBoy.park(car, new Ticket());
 
@@ -100,8 +107,9 @@ public class ParkingCarTest {
     public void should_return_no_ticket_when_call_park_given_null_car() {
         Car car = new Car();
         ParkingBoy parkingBoy = new ParkingBoy();
-        ParkingLot parkingLot = new ParkingLot();
-        parkingBoy.setParkingLot(parkingLot);
+        ParkingLot parkingLotFirst = new ParkingLot();
+        ParkingLot parkingLotSecond = new ParkingLot();
+        parkingBoy.setParkingLot(parkingLotFirst, parkingLotSecond);
         Ticket ticket = parkingBoy.park(null, new Ticket());
 
         assertNull(ticket);
@@ -111,8 +119,9 @@ public class ParkingCarTest {
     public void should_return_error_message_when_call_fetch_given_wrong_ticket() {
         Car car = new Car();
         ParkingBoy parkingBoy = new ParkingBoy();
-        ParkingLot parkingLot = new ParkingLot();
-        parkingBoy.setParkingLot(parkingLot);
+        ParkingLot parkingLotFirst = new ParkingLot();
+        ParkingLot parkingLotSecond = new ParkingLot();
+        parkingBoy.setParkingLot(parkingLotFirst, parkingLotSecond);
         Ticket ticket = parkingBoy.park(car, new Ticket());
         Ticket fakeTicket = new Ticket();
         Car fetchCar = parkingBoy.fetch(fakeTicket);
@@ -129,8 +138,9 @@ public class ParkingCarTest {
     public void should_return_error_message_when_call_fetch_given_no_ticket() {
         Car car = new Car();
         ParkingBoy parkingBoy = new ParkingBoy();
-        ParkingLot parkingLot = new ParkingLot();
-        parkingBoy.setParkingLot(parkingLot);
+        ParkingLot parkingLotFirst = new ParkingLot();
+        ParkingLot parkingLotSecond = new ParkingLot();
+        parkingBoy.setParkingLot(parkingLotFirst, parkingLotSecond);
         parkingBoy.park(car, new Ticket());
         Car fetchCar1 = parkingBoy.fetch(null);
         String errorMessage = parkingBoy.getErrorMessage();
@@ -143,8 +153,9 @@ public class ParkingCarTest {
     public void should_return_error_message3_when_call_park_given_parking_lot_full_of_10() {
         Car car = new Car();
         ParkingBoy parkingBoy = new ParkingBoy();
-        ParkingLot parkingLot = new ParkingLot();
-        parkingBoy.setParkingLot(parkingLot);
+        ParkingLot parkingLotFirst = new ParkingLot();
+        ParkingLot parkingLotSecond = new ParkingLot();
+        parkingBoy.setParkingLot(parkingLotFirst, parkingLotSecond);
         for(int i = 0; i < 10; i++) {
             parkingBoy.park(car, new Ticket());
         }

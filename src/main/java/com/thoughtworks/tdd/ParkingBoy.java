@@ -1,30 +1,37 @@
 package com.thoughtworks.tdd;
 
 public class ParkingBoy {
-    private ParkingLot parkingLot;
+    private ParkingLot parkingLotFirst;
+    private ParkingLot parkingLotSecond;
     private String errorMessage;
 
-    public void setParkingLot(ParkingLot parkingLot) {
-        this.parkingLot = parkingLot;
+    public void setParkingLot(ParkingLot parkingLotFirst, ParkingLot parkingLotSecond) {
+        this.parkingLotFirst = parkingLotFirst;
+        this.parkingLotSecond = parkingLotSecond;
     }
 
     public Ticket park(Car car, Ticket ticket) {
-        if(car == null || parkingLot.isCarFull() || parkingLot.hasParkedCar(car)) {
+        if(car == null || (parkingLotFirst.isCarFull() || parkingLotSecond.isCarFull()) || (parkingLotFirst.hasParkedCar(car) || parkingLotSecond.hasParkedCar(car))) {
             this.errorMessage = "Not enough position.";
             return null;
         }else {
-            parkingLot.parkCar(car, ticket);
+            if (parkingLotFirst.isCarFull()) {
+                parkingLotFirst.parkCar(car, ticket);
+            } else {
+                parkingLotSecond.parkCar(car, ticket);
+            }
             return ticket;
         }
     }
 
     public Car fetch(Ticket ticket) {
-        if(parkingLot.isFakeOrUsedTicket(ticket)) {
+        if(!(parkingLotFirst.isFakeOrUsedTicket(ticket) || parkingLotSecond.isFakeOrUsedTicket(ticket))) {
             this.errorMessage = "Unrecognized parking ticket.";
-        }else if(ticket == null) {
+        }
+        if(ticket == null) {
             this.errorMessage = "Please provide your parking ticket.";
         }
-        return this.parkingLot.getCar(ticket);
+        return parkingLotFirst.getCar(ticket) != null? parkingLotFirst.getCar(ticket): parkingLotSecond.getCar(ticket);
     }
 
     public String getErrorMessage() {
