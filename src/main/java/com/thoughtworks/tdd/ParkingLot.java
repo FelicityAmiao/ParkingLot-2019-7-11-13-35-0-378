@@ -4,7 +4,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ParkingLot {
-    private Map<Ticket, Car> cars = new HashMap<>();
+    private Map<Ticket, Car> cars;
+    private int TOTAL_CAPACITY;
+
+    public ParkingLot(int totalCapacity) {
+        this.TOTAL_CAPACITY = totalCapacity;
+        cars = new HashMap<>(TOTAL_CAPACITY);
+    }
 
     public void parkCar(Car car, Ticket ticket) {
         cars.put(ticket, car);
@@ -15,7 +21,7 @@ public class ParkingLot {
     }
 
     public boolean isCarFull() {
-        return cars.size() == 10;
+        return cars.size() == TOTAL_CAPACITY;
     }
 
     public boolean hasParkedCar(Car car) {
@@ -27,6 +33,10 @@ public class ParkingLot {
     }
 
     public int getRestCapacity() {
-        return 10 - cars.size();
+        return TOTAL_CAPACITY - cars.size();
+    }
+
+    public float getTotalCapacity() {
+        return TOTAL_CAPACITY;
     }
 }

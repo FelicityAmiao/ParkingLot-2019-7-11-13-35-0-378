@@ -15,7 +15,7 @@ public class ParkingBoy {
             this.errorMessage = "Not enough position.";
             return null;
         }else {
-            if (parkingLotFirst.isCarFull() || parkingLotFirst.getRestCapacity() < parkingLotSecond.getRestCapacity()) {
+            if (parkingLotFirst.isCarFull() || parkingLotFirst.getRestCapacity() * 1.0 / parkingLotFirst.getTotalCapacity() < parkingLotSecond.getRestCapacity() * 1.0 / parkingLotSecond.getTotalCapacity()) {
                 parkingLotSecond.parkCar(car, ticket);
             } else {
                 parkingLotFirst.parkCar(car, ticket);
@@ -41,5 +41,9 @@ public class ParkingBoy {
 
     public String checkTwoLotRestCapacity() {
         return "first: "+ parkingLotFirst.getRestCapacity() +", second: " + parkingLotSecond.getRestCapacity();
+    }
+
+    public String checkTwoLotPositionRate() {
+        return "first: "+ parkingLotFirst.getRestCapacity() * 1.0 / parkingLotFirst.getTotalCapacity() +", second: " + parkingLotSecond.getRestCapacity() * 1.0 / parkingLotSecond.getTotalCapacity();
     }
 }
