@@ -108,7 +108,7 @@ public class ParkingCarTest {
     }
 
     @Test
-    public void should_return_error_message_when_call_park_given_wrong_ticket() {
+    public void should_return_error_message_when_call_fetch_given_wrong_ticket() {
         Car car = new Car();
         ParkingBoy parkingBoy = new ParkingBoy();
         ParkingLot parkingLot = new ParkingLot();
@@ -124,5 +124,6 @@ public class ParkingCarTest {
         assertNull(fetchCar2);
         assertEquals("Unrecognized parking ticket.", errorMessage);
     }
+
 
 }
