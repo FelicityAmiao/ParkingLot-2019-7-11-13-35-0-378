@@ -15,7 +15,7 @@ public class ParkingBoy {
             this.errorMessage = "Not enough position.";
             return null;
         }else {
-            if (parkingLotFirst.isCarFull()) {
+            if (parkingLotFirst.isCarFull() || parkingLotFirst.getRestCapacity() < parkingLotSecond.getRestCapacity()) {
                 parkingLotSecond.parkCar(car, ticket);
             } else {
                 parkingLotFirst.parkCar(car, ticket);
@@ -37,5 +37,9 @@ public class ParkingBoy {
 
     public String getErrorMessage() {
         return errorMessage;
+    }
+
+    public String checkTwoLotRestCapacity() {
+        return "first: "+ parkingLotFirst.getRestCapacity() +", second: " + parkingLotSecond.getRestCapacity();
     }
 }

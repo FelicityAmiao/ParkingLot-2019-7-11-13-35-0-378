@@ -179,4 +179,19 @@ public class ParkingCarTest {
         assertSame(car, fetchCar);
     }
 
+    @Test
+    public void should_return_first_lot_rest_capacity_9_and_second_lot_capacity_9_when_call_park_given_2_car() {
+        Car car = new Car();
+        Car car2 = new Car();
+        ParkingBoy parkingBoy = new ParkingBoy();
+        ParkingLot parkingLotFirst = new ParkingLot();
+        ParkingLot parkingLotSecond = new ParkingLot();
+        parkingBoy.setParkingLot(parkingLotFirst, parkingLotSecond);
+        parkingBoy.park(car, new Ticket());
+        parkingBoy.park(car2, new Ticket());
+        String twoLotRestCapacity = parkingBoy.checkTwoLotRestCapacity();
+
+        assertEquals("first: 9, second: 9", twoLotRestCapacity);
+    }
+
 }

@@ -25,4 +25,8 @@ public class ParkingLot {
     public boolean isFakeOrUsedTicket(Ticket ticket) {
         return cars.containsKey(ticket);
     }
+
+    public int getRestCapacity() {
+        return 10 - cars.size();
+    }
 }
