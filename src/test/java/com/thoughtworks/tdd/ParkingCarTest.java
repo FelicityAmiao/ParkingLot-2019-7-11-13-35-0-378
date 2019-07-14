@@ -47,6 +47,17 @@ public class ParkingCarTest {
     }
 
     @Test
+    public void should_return_no_car_when_call_fetch_given_no_ticket() {
+        ParkingBoy parkingBoy = new ParkingBoy();
+        ParkingLot parkingLot = new ParkingLot();
+        parkingBoy.setParkingLot(parkingLot);
+        Ticket fakeTicket = new Ticket();
+        Car fetchCar = parkingBoy.fetch(null);
+
+        assertNull(fetchCar);
+    }
+
+    @Test
     public void should_return_no_car_when_call_fetch_given_used_ticket_by_parking_car() {
         Car car = new Car();
         ParkingBoy parkingBoy = new ParkingBoy();
