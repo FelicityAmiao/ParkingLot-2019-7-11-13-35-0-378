@@ -2,6 +2,7 @@ package com.thoughtworks.tdd;
 
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertSame;
 
@@ -104,6 +105,24 @@ public class ParkingCarTest {
         Ticket ticket = parkingBoy.park(null, new Ticket());
 
         assertNull(ticket);
+    }
+
+    @Test
+    public void should_return_error_message_when_call_park_given_wrong_ticket() {
+        Car car = new Car();
+        ParkingBoy parkingBoy = new ParkingBoy();
+        ParkingLot parkingLot = new ParkingLot();
+        parkingBoy.setParkingLot(parkingLot);
+        Ticket ticket = parkingBoy.park(car, new Ticket());
+        Ticket fakeTicket = new Ticket();
+        Car fetchCar = parkingBoy.fetch(fakeTicket);
+        parkingBoy.fetch(ticket);
+        Car fetchCar2 = parkingBoy.fetch(ticket);
+        String errorMessage = parkingBoy.giveErrorMessage(ticket);
+
+        assertNull(fetchCar);
+        assertNull(fetchCar2);
+        assertEquals("Unrecognized parking ticket.", errorMessage);
     }
 
 }

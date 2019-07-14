@@ -19,4 +19,8 @@ public class ParkingBoy {
     public Car fetch(Ticket ticket) {
         return this.parkingLot.getCar(ticket);
     }
+
+    public String giveErrorMessage(Ticket ticket) {
+        return "Unrecognized parking ticket.";
+    }
 }
