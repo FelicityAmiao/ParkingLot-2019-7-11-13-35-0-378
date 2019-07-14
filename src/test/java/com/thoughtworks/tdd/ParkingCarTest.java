@@ -51,7 +51,6 @@ public class ParkingCarTest {
         ParkingBoy parkingBoy = new ParkingBoy();
         ParkingLot parkingLot = new ParkingLot();
         parkingBoy.setParkingLot(parkingLot);
-        Ticket fakeTicket = new Ticket();
         Car fetchCar = parkingBoy.fetch(null);
 
         assertNull(fetchCar);
