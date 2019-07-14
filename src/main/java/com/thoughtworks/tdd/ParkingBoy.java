@@ -2,6 +2,7 @@ package com.thoughtworks.tdd;
 
 public class ParkingBoy {
     private ParkingLot parkingLot;
+    private String errorMessage;
 
     public void setParkingLot(ParkingLot parkingLot) {
         this.parkingLot = parkingLot;
@@ -9,6 +10,7 @@ public class ParkingBoy {
 
     public Ticket park(Car car, Ticket ticket) {
         if(car == null || parkingLot.isCarFull() || parkingLot.hasParkedCar(car)) {
+            this.errorMessage = "Not enough position.";
             return null;
         }else {
             parkingLot.parkCar(car, ticket);
@@ -25,5 +27,9 @@ public class ParkingBoy {
             return "Unrecognized parking ticket.";
         }
         return "Please provide your parking ticket.";
+    }
+
+    public String getErrorMessage() {
+        return errorMessage;
     }
 }

@@ -139,4 +139,19 @@ public class ParkingCarTest {
         assertEquals("Please provide your parking ticket.", errorMessage);
     }
 
+    @Test
+    public void should_return_error_message3_when_call_park_given_parking_lot_full_of_10() {
+        Car car = new Car();
+        ParkingBoy parkingBoy = new ParkingBoy();
+        ParkingLot parkingLot = new ParkingLot();
+        parkingBoy.setParkingLot(parkingLot);
+        for(int i = 0; i < 10; i++) {
+            parkingBoy.park(car, new Ticket());
+        }
+        parkingBoy.park(car, new Ticket());
+        String errorMessage = parkingBoy.getErrorMessage();
+
+        assertEquals("Not enough position.", errorMessage);
+    }
+
 }
