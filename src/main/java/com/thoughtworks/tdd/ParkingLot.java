@@ -17,4 +17,8 @@ public class ParkingLot {
     public boolean isCarFull() {
         return cars.size() == 10;
     }
+
+    public boolean hasParkedCar(Car car) {
+        return cars.containsValue(car);
+    }
 }
