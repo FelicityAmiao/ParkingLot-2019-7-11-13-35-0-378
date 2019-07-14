@@ -11,14 +11,14 @@ public class ParkingBoy {
     }
 
     public Ticket park(Car car, Ticket ticket) {
-        if(car == null || (parkingLotFirst.isCarFull() || parkingLotSecond.isCarFull()) || (parkingLotFirst.hasParkedCar(car) || parkingLotSecond.hasParkedCar(car))) {
+        if(car == null || (parkingLotFirst.isCarFull() && parkingLotSecond.isCarFull()) || (parkingLotFirst.hasParkedCar(car) || parkingLotSecond.hasParkedCar(car))) {
             this.errorMessage = "Not enough position.";
             return null;
         }else {
             if (parkingLotFirst.isCarFull()) {
-                parkingLotFirst.parkCar(car, ticket);
-            } else {
                 parkingLotSecond.parkCar(car, ticket);
+            } else {
+                parkingLotFirst.parkCar(car, ticket);
             }
             return ticket;
         }
@@ -31,7 +31,8 @@ public class ParkingBoy {
         if(ticket == null) {
             this.errorMessage = "Please provide your parking ticket.";
         }
-        return parkingLotFirst.getCar(ticket) != null? parkingLotFirst.getCar(ticket): parkingLotSecond.getCar(ticket);
+        Car fetchCar = parkingLotFirst.getCar(ticket);
+        return fetchCar != null? fetchCar: parkingLotSecond.getCar(ticket);
     }
 
     public String getErrorMessage() {

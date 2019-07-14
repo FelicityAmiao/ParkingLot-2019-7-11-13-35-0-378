@@ -76,16 +76,15 @@ public class ParkingCarTest {
     }
 
     @Test
-    public void should_return_no_ticket_when_call_park_given_parking_lot_is_full_of_10() {
-        Car car = new Car();
+    public void should_return_no_ticket_when_call_park_given_parking_lot_is_full_of_20() {
         ParkingBoy parkingBoy = new ParkingBoy();
         ParkingLot parkingLotFirst = new ParkingLot();
         ParkingLot parkingLotSecond = new ParkingLot();
         parkingBoy.setParkingLot(parkingLotFirst, parkingLotSecond);
-        for(int i = 0; i < 10; i++) {
-            parkingBoy.park(car, new Ticket());
+        for(int i = 0; i < 20; i++) {
+            parkingBoy.park(new Car(), new Ticket());
         }
-        Ticket ticket = parkingBoy.park(car, new Ticket());
+        Ticket ticket = parkingBoy.park(new Car(), new Ticket());
 
         assertNull(ticket);
     }
@@ -150,19 +149,34 @@ public class ParkingCarTest {
     }
 
     @Test
-    public void should_return_error_message3_when_call_park_given_parking_lot_full_of_10() {
+    public void should_return_error_message3_when_call_park_given_parking_lot_full_of_20() {
+        ParkingBoy parkingBoy = new ParkingBoy();
+        ParkingLot parkingLotFirst = new ParkingLot();
+        ParkingLot parkingLotSecond = new ParkingLot();
+        parkingBoy.setParkingLot(parkingLotFirst, parkingLotSecond);
+        for(int i = 0; i < 20; i++) {
+            parkingBoy.park(new Car(), new Ticket());
+        }
+        parkingBoy.park(new Car(), new Ticket());
+        String errorMessage = parkingBoy.getErrorMessage();
+
+        assertEquals("Not enough position.", errorMessage);
+    }
+
+    @Test
+    public void should_return_correct_car_when_call_fetch_given_parking_lot_first_full_of_10() {
         Car car = new Car();
         ParkingBoy parkingBoy = new ParkingBoy();
         ParkingLot parkingLotFirst = new ParkingLot();
         ParkingLot parkingLotSecond = new ParkingLot();
         parkingBoy.setParkingLot(parkingLotFirst, parkingLotSecond);
         for(int i = 0; i < 10; i++) {
-            parkingBoy.park(car, new Ticket());
+            parkingBoy.park(new Car(), new Ticket());
         }
-        parkingBoy.park(car, new Ticket());
-        String errorMessage = parkingBoy.getErrorMessage();
+        Ticket ticket = parkingBoy.park(car, new Ticket());
+        Car fetchCar = parkingBoy.fetch(ticket);
 
-        assertEquals("Not enough position.", errorMessage);
+        assertSame(car, fetchCar);
     }
 
 }
