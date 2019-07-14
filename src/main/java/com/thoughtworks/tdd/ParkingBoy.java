@@ -8,7 +8,7 @@ public class ParkingBoy {
     }
 
     public Ticket park(Car car, Ticket ticket) {
-        if(parkingLot.isCarFull() || parkingLot.hasParkedCar(car)) {
+        if(car == null || parkingLot.isCarFull() || parkingLot.hasParkedCar(car)) {
             return null;
         }else {
             parkingLot.parkCar(car, ticket);
