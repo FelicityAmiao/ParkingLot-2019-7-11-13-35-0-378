@@ -1,6 +1,6 @@
 package com.thoughtworks.tdd;
 
-public class ParkingBoy {
+public class SuperSmartParkingBoy extends ParkingBoy{
     private ParkingLot parkingLotFirst;
     private ParkingLot parkingLotSecond;
     private String errorMessage;
@@ -15,7 +15,7 @@ public class ParkingBoy {
             this.errorMessage = "Not enough position.";
             return null;
         }else {
-            if (parkingLotFirst.isCarFull()) {
+            if (parkingLotFirst.isCarFull() || parkingLotFirst.getRestCapacity() * 1.0 / parkingLotFirst.getTotalCapacity() < parkingLotSecond.getRestCapacity() * 1.0 / parkingLotSecond.getTotalCapacity()) {
                 parkingLotSecond.parkCar(car, ticket);
             } else {
                 parkingLotFirst.parkCar(car, ticket);
@@ -39,4 +39,11 @@ public class ParkingBoy {
         return errorMessage;
     }
 
+    public String checkTwoLotRestCapacity() {
+        return "first: "+ parkingLotFirst.getRestCapacity() +", second: " + parkingLotSecond.getRestCapacity();
+    }
+
+    public String checkTwoLotPositionRate() {
+        return "first: "+ parkingLotFirst.getRestCapacity() * 1.0 / parkingLotFirst.getTotalCapacity() +", second: " + parkingLotSecond.getRestCapacity() * 1.0 / parkingLotSecond.getTotalCapacity();
+    }
 }

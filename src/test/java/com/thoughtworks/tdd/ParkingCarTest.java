@@ -185,7 +185,7 @@ public class ParkingCarTest {
     public void should_return_first_lot_rest_capacity_9_and_second_lot_capacity_9_when_call_park_given_2_car() {
         Car car = new Car();
         Car car2 = new Car();
-        ParkingBoy parkingBoy = new ParkingBoy();
+        SmartParkingBoy parkingBoy = new SmartParkingBoy();
         ParkingLot parkingLotFirst = new ParkingLot(INIT_TOTAL_CAPACITY);
         ParkingLot parkingLotSecond = new ParkingLot(INIT_TOTAL_CAPACITY);
         parkingBoy.setParkingLot(parkingLotFirst, parkingLotSecond);
@@ -198,7 +198,7 @@ public class ParkingCarTest {
 
     @Test
     public void should_return_first_lot_rate_0p8_second_lot_rate_0p8_when_call_park_given_4_cars_with_first_lot_5_capacity_second_lot_10_capacity() {
-        ParkingBoy parkingBoy = new ParkingBoy();
+        SuperSmartParkingBoy parkingBoy = new SuperSmartParkingBoy();
         ParkingLot parkingLotFirst = new ParkingLot(INIT_TOTAL_CAPACITY);
         ParkingLot parkingLotSecond = new ParkingLot(INIT_TOTAL_CAPACITY);
         parkingBoy.setParkingLot(parkingLotFirst, parkingLotSecond);
