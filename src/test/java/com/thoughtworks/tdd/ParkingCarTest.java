@@ -2,9 +2,10 @@ package com.thoughtworks.tdd;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertSame;
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 public class ParkingCarTest {
 
@@ -83,7 +84,7 @@ public class ParkingCarTest {
         ParkingLot parkingLotFirst = new ParkingLot(INIT_TOTAL_CAPACITY);
         ParkingLot parkingLotSecond = new ParkingLot(INIT_TOTAL_CAPACITY);
         parkingBoy.setParkingLot(parkingLotFirst, parkingLotSecond);
-        for(int i = 0; i < 20; i++) {
+        for (int i = 0; i < 20; i++) {
             parkingBoy.park(new Car(), new Ticket());
         }
         Ticket ticket = parkingBoy.park(new Car(), new Ticket());
@@ -156,7 +157,7 @@ public class ParkingCarTest {
         ParkingLot parkingLotFirst = new ParkingLot(INIT_TOTAL_CAPACITY);
         ParkingLot parkingLotSecond = new ParkingLot(INIT_TOTAL_CAPACITY);
         parkingBoy.setParkingLot(parkingLotFirst, parkingLotSecond);
-        for(int i = 0; i < 20; i++) {
+        for (int i = 0; i < 20; i++) {
             parkingBoy.park(new Car(), new Ticket());
         }
         parkingBoy.park(new Car(), new Ticket());
@@ -172,7 +173,7 @@ public class ParkingCarTest {
         ParkingLot parkingLotFirst = new ParkingLot(INIT_TOTAL_CAPACITY);
         ParkingLot parkingLotSecond = new ParkingLot(INIT_TOTAL_CAPACITY);
         parkingBoy.setParkingLot(parkingLotFirst, parkingLotSecond);
-        for(int i = 0; i < 10; i++) {
+        for (int i = 0; i < 10; i++) {
             parkingBoy.park(new Car(), new Ticket());
         }
         Ticket ticket = parkingBoy.park(car, new Ticket());
@@ -202,12 +203,31 @@ public class ParkingCarTest {
         ParkingLot parkingLotFirst = new ParkingLot(INIT_TOTAL_CAPACITY);
         ParkingLot parkingLotSecond = new ParkingLot(INIT_TOTAL_CAPACITY);
         parkingBoy.setParkingLot(parkingLotFirst, parkingLotSecond);
-        for(int i = 0; i < 4; i++) {
+        for (int i = 0; i < 4; i++) {
             parkingBoy.park(new Car(), new Ticket());
         }
         String twoLotPositionRate = parkingBoy.checkTwoLotPositionRate();
 
         assertEquals("first: 0.8, second: 0.8", twoLotPositionRate);
+    }
+
+    @Test
+    public void should_return_car_when_call_specifyParkingBoyPark_given_ticket_by_parking_before() {
+        List<ParkingBoy> parkingBoys = new ArrayList<>();
+        for (int i = 0; i < 5; i++) {
+            SuperSmartParkingBoy parkingBoy = new SuperSmartParkingBoy();
+            ParkingLot parkingLotFirst = new ParkingLot(INIT_TOTAL_CAPACITY);
+            ParkingLot parkingLotSecond = new ParkingLot(INIT_TOTAL_CAPACITY);
+            parkingBoy.setParkingLot(parkingLotFirst, parkingLotSecond);
+            parkingBoys.add(parkingBoy);
+        }
+        ServiceManager serviceManager = new ServiceManager(parkingBoys);
+        ParkingBoy parkingBoy = serviceManager.getManagerParkingBoys().get(0);
+
+        Car car = new Car();
+        Ticket ticket = serviceManager.specifyParkingBoyPark(parkingBoy, car);
+        Car fetchCar = serviceManager.specifyParkingBoyFetch(parkingBoy, ticket);
+        assertSame(car, fetchCar);
     }
 
 }
