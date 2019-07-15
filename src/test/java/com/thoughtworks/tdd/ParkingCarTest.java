@@ -242,4 +242,23 @@ public class ParkingCarTest {
         assertSame(car, fetchCar);
     }
 
+    @Test
+    public void should_return_error_message_when_call_specifyParkingBoyFetch_given_no_ticket() {
+        List<ParkingBoy> parkingBoys = new ArrayList<>();
+        SuperSmartParkingBoy parkingBoy = new SuperSmartParkingBoy();
+        ParkingLot parkingLotFirst = new ParkingLot(INIT_TOTAL_CAPACITY);
+        ParkingLot parkingLotSecond = new ParkingLot(INIT_TOTAL_CAPACITY);
+        parkingBoy.setParkingLot(parkingLotFirst, parkingLotSecond);
+        parkingBoys.add(parkingBoy);
+        ServiceManager serviceManager = new ServiceManager(parkingBoys);
+        serviceManager.setParkingLot(new ParkingLot(INIT_TOTAL_CAPACITY), new ParkingLot(INIT_TOTAL_CAPACITY));
+
+        serviceManager.specifyParkingBoyPark(parkingBoys.get(0), new Car());
+        serviceManager.specifyParkingBoyFetch(parkingBoys.get(0), null);
+
+        String errorMessage = serviceManager.getErrorMsgFromParkingBoy();
+
+        assertEquals("Please provide your parking ticket.", errorMessage);
+    }
+
 }

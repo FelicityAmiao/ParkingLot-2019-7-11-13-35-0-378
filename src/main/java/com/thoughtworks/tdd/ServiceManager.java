@@ -4,14 +4,16 @@ import java.util.List;
 
 public class ServiceManager extends ParkingBoy{
     private List<ParkingBoy> parkingBoys;
-
+    private String errorMsgFromParkingBoy;
 
     public ServiceManager(List<ParkingBoy> parkingBoys) {
         this.parkingBoys = parkingBoys;
     }
 
     public Ticket specifyParkingBoyPark(ParkingBoy specifyParkingBoy, Car car) {
-        return specifyParkingBoy.park(car, new Ticket());
+        Ticket ticket = specifyParkingBoy.park(car, new Ticket());
+        this.errorMsgFromParkingBoy = specifyParkingBoy.getErrorMessage();
+        return ticket;
     }
 
     public List<ParkingBoy> getManagerParkingBoys() {
@@ -19,6 +21,12 @@ public class ServiceManager extends ParkingBoy{
     }
 
     public Car specifyParkingBoyFetch(ParkingBoy parkingBoy, Ticket ticket) {
-        return parkingBoy.fetch(ticket);
+        Car car = parkingBoy.fetch(ticket);
+        this.errorMsgFromParkingBoy = parkingBoy.getErrorMessage();
+        return car;
+    }
+
+    public String getErrorMsgFromParkingBoy() {
+        return errorMsgFromParkingBoy;
     }
 }
