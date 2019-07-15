@@ -230,4 +230,16 @@ public class ParkingCarTest {
         assertSame(car, fetchCar);
     }
 
+    @Test
+    public void should_return_car_when_call_fetch_given_ticket_by_parking_before() {
+        List<ParkingBoy> parkingBoys = new ArrayList<>();
+        ServiceManager serviceManager = new ServiceManager(parkingBoys);
+        serviceManager.setParkingLot(new ParkingLot(INIT_TOTAL_CAPACITY), new ParkingLot(INIT_TOTAL_CAPACITY));
+
+        Car car = new Car();
+        Ticket ticket = serviceManager.park(car, new Ticket());
+        Car fetchCar = serviceManager.fetch(ticket);
+        assertSame(car, fetchCar);
+    }
+
 }
